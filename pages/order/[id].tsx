@@ -61,7 +61,10 @@ function OrderScreen() {
             currency: "USD",
           },
         });
-        paypalDispatch({ type: "setLoadingStatus", value: true });
+        dispatch({
+          type: "setLoadingStatus",
+          value: true,
+        });
       };
       loadPaypalScript();
     }

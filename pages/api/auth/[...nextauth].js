@@ -1,19 +1,13 @@
 import bcryptjs from "bcryptjs";
 import User from "@/models/User";
 import db from "@/utils/db";
-import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import NextAuth, { Awaitable } from "next-auth";
+import CredentialsProvider, {
+  CredentialInput,
+} from "next-auth/providers/credentials";
 import GithubProvider from "next-auth/providers/github";
 import mongoose from "mongoose";
-// interface Session {
-//   user: {
-//     _id: mongoose.Schema.Types.ObjectId,
-//     name: String,
-//     email: String,
-//     image: String,
-//     isAdmin: boolean,
-//   };
-// }
+
 export const authOptions = {
   session: {
     strategy: "jwt",
@@ -55,6 +49,7 @@ export const authOptions = {
             isAdmin: user.isAdmin,
           };
         }
+        return null;
         throw new Error("Invalid email or password");
       },
     }),
